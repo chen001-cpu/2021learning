@@ -1,0 +1,35 @@
+本题要求编写程序，对顺序读入的n个整数，顺次计算后项减前项之差，并按每行三个元素的格式输出结果。
+
+
+
+#include<stdio.h>
+int main()
+{
+    int n;//整数个数
+    scanf("%d", &n);
+    int i, temp, flag=0;
+    int str[10];//定义数组
+    for (i = 0; i < n; i++)//输入数组
+    {
+        scanf("%d", &str[i]);
+    }
+    for (i = 1; i < n; i++)
+    {
+        temp = str[i] - str[i-1];//注意i-1，如果用i+1的话，数据会超出
+        flag++;
+        if (flag % 3 == 0 || flag == n - 1)//行末没有空格
+        {
+            printf("%d", temp);
+        }
+        else//行间有空格
+        {
+            printf("%d ", temp);
+        }
+        if (flag % 3 == 0)//每3个换行一次
+        {
+            printf("\n");
+        }
+    }
+    return 0;
+
+}
