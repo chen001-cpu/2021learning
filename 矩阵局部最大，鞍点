@@ -110,6 +110,8 @@ int main()
 			printf("%d %d\n",i,j);
 			break;
 		}
+		else 
+		printf("None\n");
 	}
 	return 0;
 }
