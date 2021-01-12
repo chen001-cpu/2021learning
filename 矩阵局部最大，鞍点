@@ -77,10 +77,10 @@ int main()
 输出样例2：
 NONE
  --------------------------------------------------------------------
- #include<stdio.h>
+#include<stdio.h>
 int main()
 {
-	int i,j,a[6][6],flag,n,b[6][6];
+	int i,j,a[6][6],flag,flagg=0,k,l,n,b[6];
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	for(j=0;j<n;j++)
@@ -91,7 +91,7 @@ int main()
 		for(j=0;j<n;j++)
 		{
 			if(a[i][j]>b[i])
-			b[i][j]=a[i][j];
+			b[i]=a[i][j];
 		}
 	}
 	for(j=0;j<n;j++)
@@ -99,7 +99,7 @@ int main()
 		flag=0;
 		for(i=0;i<n;i++)
 		{
-			if(a[i][j]>b[i][j])
+			if(a[i][j]<b[j])
 		    {
 		    	flag=1;
 		    	break;
@@ -107,11 +107,19 @@ int main()
 		}
 		if(flag==0)
 		{
-			printf("%d %d\n",i,j);
-			break;
+			for(k=0;k<n;k++)
+			{
+				if(a[k][j]==b[j])
+				{
+					printf("%d %d\n",k,j);
+					flagg=1;
+					return 0;
+				}
+			}
 		}
-		else 
-		printf("None\n");
 	}
+	if(flagg==0)
+	printf("None\n");
 	return 0;
 }
+
