@@ -80,86 +80,37 @@ NONE
 #include<stdio.h>
 int main()
 {
-	int i,j,a[6][6],flag,flagg=0,k,l,n,b[6];
+	int i,j,maxj,a[6][6],max,k,flag,n;//maxj记录每一行最大值纵坐标，max记录每一行最大值
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	for(j=0;j<n;j++)
 	scanf("%d",&a[i][j]);
 	for(i=0;i<n;i++)
 	{
-		b[i]=a[i][0];
+		max=a[i][0];//令每一行的最大值为此行开头元素
+		maxj=0;//坐标同样赋值
 		for(j=0;j<n;j++)
 		{
-			if(a[i][j]>b[i])
-			b[i]=a[i][j];
-		}
-	}
-	for(j=0;j<n;j++)
-	{
-		flag=0;
-		for(i=0;i<n;i++)
-		{
-			if(a[i][j]<b[j])
-		    {
-		    	flag=1;
-		    	break;
-			}
-		}
-		if(flag==0)
-		{
-			for(k=0;k<n;k++)
+			if(a[i][j]>=max)//等于是为了满足题意，最大右并列
 			{
-				if(a[k][j]==b[j])
-				{
-					printf("%d %d\n",k,j);
-					flagg=1;
-					return 0;
-				}
+				max=a[i][j];//换最大值
+				maxj=j;//以及纵坐标
 			}
 		}
-	}
-	if(flagg==0)
-	printf("None\n");
-	return 0;
-}
-------------------参考答案
-#include <stdio.h>
-
-int main()
-{
-	int a[6][6]={0},i,j,k,n,max,maxj;
-	int flag=0;
-	scanf("%d",&n);
-	for(i=0; i<n; i++)
-		for(j=0; j<n; j++)
-			scanf("%d",&a[i][j]);
-
-	for(i=0; i<n; i++)
-	{
-		max=a[i][0];
-		maxj=0;
-		for(j=0; j<n; j++)
+		for(k=0;k<n;k++)//对其进行列循环
 		{
-			if(a[i][j]>=max)
-			{
-				max=a[i][j];
-				maxj=j;
-			}
+			if(a[k][maxj]>max)//不满足条件的
+			break;
 		}
-		for(k=0; k<n; k++)
+		if(k==n)
 		{
-			if(a[k][maxj] < max)
-				break;
-		}
-		if(k == n)
-		{
-			printf("%d %d",i,maxj);
 			flag=1;
+			printf("%d %d\n",i,maxj);//满足条件直接输出
 		}
 	}
-	if(flag == 0)
-		printf("NONE\n");
-	return 0;
+	if(flag==0)
+	{
+		printf("NONE\n");//都没有的话，输出NONE
+	}
+	return 0; 
 }
-
-
