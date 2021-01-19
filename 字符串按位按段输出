@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int i,n,start,step;
+	char a[100000];
+	gets(a);
+	scanf("%d%d",&start,&step);
+	n=strlen(a);
+	for(i=start;i<n;i=i+step)
+	{
+		printf("%c",a[i]);
+	}
+	return 0;
+}
