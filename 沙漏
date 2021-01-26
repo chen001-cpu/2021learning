@@ -18,7 +18,13 @@ int main()
 	int i,j,k,n,t,s;
 	char a;
 	scanf("%d %c",&n,&a);
-	for(i=1;i<n;i++)
+	if(n==1)
+	{
+		printf("*\n0\n");
+	 } 
+	 else
+	 {
+	 		for(i=1;i<n;i++)
 	{
 		if(((1+1+(i-1)*2)*i-1)>n)
 		break;
@@ -53,5 +59,6 @@ int main()
 	}
 	s=n-((1+1+(t-1)*2)*t-1);
 	printf("%d\n",s);
+	 }
 	return 0;
 }
