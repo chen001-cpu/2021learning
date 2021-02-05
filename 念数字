@@ -31,7 +31,7 @@ fu liu ling ling
 int main()
 {
 	char string[1005];
-	char *a[]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
+	char *a[]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};//不能用char[]={......},必须指针
 	int i,n;
 	char c;
 	scanf("%s",string);
@@ -39,12 +39,12 @@ int main()
 		printf("fu");
 	else
 	{
-		n=string[0]-'0';
+		n=string[0]-'0';//'0'可以换为48
 		printf("%s",a[n]);
 	}
 	for(i=1;i<strlen(string);i++)
 	{
-		n=string[i]-'0';
+		n=string[i]-'0';//'0'可以换为48
 		printf(" %s",a[n]);	
 	}
 	return 0;
