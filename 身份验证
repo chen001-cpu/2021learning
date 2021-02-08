@@ -1,0 +1,63 @@
+#include<stdio.h>
+#define size 21
+int Weight(char num[size])//自定义函数算加权值Z，考虑到身份证可能含字母，用字符数组储存身份证，故而形参也是字符数组
+{                 
+ int t;
+ t=(num[0]-'0')*7+(num[1]-'0')*9+(num[2]-'0')*10+(num[3]-'0')*5+(num[4]-'0')*8+(num[5]-'0')*4+(num[6]-'0')*2+(num[7]-'0')*1+(num[8]-'0')*6+(num[9]-'0')*3+(num[10]-'0')*7+(num[11]-'0')*9+(num[12]-'0')*10+(num[13]-'0')*5+(num[14]-'0')*8+(num[15]-'0')*4+(num[16]-'0')*2;
+ t=t%11;
+ return t;       //'数字'-'0'=数字，也可能出现前17位误入字母的情况，这个时候就是'字符'-'0'= ASCII码差值(数字字符也是这样，只不过正好是需要的值)
+}
+char Check(int n)          //自定义函数算加权结果对应的效验码M，函数返回值也是字符型，与身份证(字符型)最后一位比较
+{
+ char s;
+ switch(n)
+ {
+      case 0 :s='1';break;
+      case 1 :s='0';break;
+      case 2 :s='X';break;
+      case 3 :s='9';break;
+      case 4 :s='8';break;
+      case 5 :s='7';break;
+      case 6 :s='6';break;
+      case 7 :s='5';break;
+      case 8 :s='4';break;
+      case 9 :s='3';break;
+      case 10:s='2';break;
+ }
+ return s;
+}
+int main()
+{
+ int i,j,N,error=0;
+ char date[100][size]={'\0'};
+ scanf("%d",&N);
+ for(i=0;i<N;i++)
+ {
+  scanf("%s",date[i]);
+  for(j=0;j<17;j++)
+  {
+   if(date[i][j]<'0'||date[i][j]>'9')       //如果出现前17位误入字母的情况，直接退出第一个循环(第一个身份证)
+   {
+    date[i][size-1]=1;                      //输入的身份证没有占完size，利用(size-1)位置标记正确和错误
+    break;
+   }
+  }
+  if(date[i][17]!=Check(Weight(date[i])))          //比较身份证第18位是否等于效验码M
+  {
+   date[i][size-1]=1;
+  }
+ }
+ for(i=0;i<N;i++)
+ {
+  if(date[i][size-1])
+  {
+   printf("%s\n",date[i]);
+   error++;
+  }
+ }
+ if(!error)              //当error==0时，说明没有出现问题
+ {
+  printf("All passed\n");
+ }
+ return 0;
+}
