@@ -11,3 +11,36 @@
 输出样例：
 3
 5*6*7
+----------------------------------------
+#include<stdlib.h>
+#include<math.h>
+int main()
+{
+    int n,i,j,a=0,s=0,sum,f=0,t=0;
+    scanf("%d",&n);
+    for(i=2;i<=sqrt(n);i++)   //必须要开方，不然会运算超时
+    {
+        sum=1;t=0;f=i;
+        for(j=i;n%j==0&&n%(sum*j)==0;j++)
+        {
+            t++;
+            sum=sum*j;
+        }
+        if(t>s)
+        {
+            a=f;s=t;
+        }
+    }
+    if(s==0)
+        printf("%d\n%d\n",1,n);
+    else
+    {
+        printf("%d\n",s);
+        for(i=a;i<a+s-1;i++)
+        {
+            printf("%d*",i);
+        }
+        printf("%d\n",i);
+    }
+    return 0;
+}
